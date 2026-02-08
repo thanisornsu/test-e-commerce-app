@@ -70,7 +70,7 @@ npm test
 
 ## CI/CD (C1)
 
-Workflow: [.github/workflows/e2e.yml](.github/workflows/e2e.yml). Runs on push/PR to `main` or `master`; uploads report and test-results as artifacts.
+Workflow: [.github/workflows/e2e.yml](.github/workflows/e2e.yml). Runs on push/PR to `main` or `master`; uploads report and test-results as artifacts. To run TC001 in CI, add repo secrets `TEST_USER_EMAIL` and `TEST_USER_PASSWORD` (registered account on the SUT).
 
 **Block deploy:** Login or add-to-cart fails, critical assertion fails.  
 **Don’t block:** Flaky UI (investigate), minor search variance, small perf regression.
