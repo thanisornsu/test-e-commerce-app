@@ -70,7 +70,7 @@ npm test
 
 ## CI/CD (C1)
 
-Run on push/PR: `docker compose up test --abort-on-container-exit`; upload `playwright-report/` on failure.
+Workflow: [.github/workflows/e2e.yml](.github/workflows/e2e.yml). Runs on push/PR to `main` or `master`; uploads report and test-results as artifacts.
 
 **Block deploy:** Login or add-to-cart fails, critical assertion fails.  
 **Don’t block:** Flaky UI (investigate), minor search variance, small perf regression.
