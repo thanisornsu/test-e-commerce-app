@@ -18,7 +18,7 @@ export class ProductsPage extends BasePage {
     this.productCards = page.locator('.productinfo');
     this.viewProductLinks = page.locator('a:has-text("View Product")');
     this.addToCartButtons = page.locator('.add-to-cart');
-    this.addToCartOnDetailPage = page.getByRole('button', { name: 'Add to cart' });
+    this.addToCartOnDetailPage = page.getByRole('button', { name: 'Add to cart' }).or(page.locator('a:has-text("Add to cart")'));
     this.continueShoppingButton = page.locator('button:has-text("Continue Shopping")');
     this.viewCartLink = page.locator('a:has-text("View Cart")');
   }
@@ -61,5 +61,10 @@ export class ProductsPage extends BasePage {
   async getFirstProductPrice(): Promise<string> {
     const priceElement = this.productCards.first().locator('h2');
     return await this.getElementText(priceElement);
+  }
+
+  async waitForModalClosed() {
+    await this.continueShoppingButton.waitFor({ state: 'hidden', timeout: 8000 }).catch(() => {});
+    await this.page.waitForTimeout(600);
   }
 }

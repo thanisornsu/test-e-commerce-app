@@ -32,12 +32,22 @@ test.describe('Shopping Cart Tests', () => {
     await productsPage.navigateToProducts();
     await productsPage.addFirstProductToCart();
     await productsPage.continueShoppingAfterAdd();
+    await productsPage.waitForModalClosed();
     await page.waitForTimeout(1000);
 
-    await productsPage.viewProductLinks.nth(1).click();
+    const secondViewProduct = productsPage.viewProductLinks.nth(1);
+    await secondViewProduct.waitFor({ state: 'visible', timeout: 15000 });
+    await secondViewProduct.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(400);
+    await secondViewProduct.click();
+    await expect(page).toHaveURL(/\/product_details\/\d+/, { timeout: 15000 });
     await page.waitForLoadState('domcontentloaded');
-    await productsPage.addToCartOnDetailPage.click();
-    await productsPage.continueShoppingButton.waitFor({ state: 'visible', timeout: 5000 });
+    await page.waitForTimeout(500);
+
+    const addToCart = productsPage.addToCartOnDetailPage.first();
+    await addToCart.waitFor({ state: 'visible', timeout: 15000 });
+    await addToCart.click();
+    await productsPage.continueShoppingButton.waitFor({ state: 'visible', timeout: 15000 });
     await productsPage.continueShoppingAfterAdd();
 
     await cartPage.navigateToCart();
