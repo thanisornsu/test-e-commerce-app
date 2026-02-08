@@ -4,6 +4,7 @@
   "description": "E-commerce automation tests using Playwright",
   "scripts": {
     "test": "playwright test",
+    "test:ci": "node -e \"process.env.CI='true'; require('child_process').execSync('npx playwright test', {stdio:'inherit'})\"",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report"

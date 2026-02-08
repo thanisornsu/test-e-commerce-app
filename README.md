@@ -55,6 +55,8 @@ npx playwright install chromium
 npm test
 ```
 
+**Reproduce CI locally** (same retries, viewport, env): `npm run test:ci`
+
 **Config:** Copy `.env.example` to `.env`. Set `TEST_USER_EMAIL` / `TEST_USER_PASSWORD` for TC001 (optional).
 
 **Report:** `npx playwright show-report`
@@ -64,7 +66,7 @@ npm test
 ## Config
 
 - **Env:** `BASE_URL`, `TEST_USER_EMAIL`, `TEST_USER_PASSWORD`, `CI` — see `.env.example`.
-- **Playwright:** 60s timeout, 2 retries in CI, HTML/list/JSON reporters, artifacts on failure.
+- **Playwright:** 60s timeout, 2 retries in CI, viewport 1280×720 (CI/local parity), HTML/list/JSON reporters, artifacts on failure.
 
 ---
 
